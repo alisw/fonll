@@ -1,0 +1,68 @@
+Installation instruction for the FONLL code.
+
+The code has been developed on a Linux system. It should also work on
+othe Unix platforms. You need GNU make. The CERN library are
+needed if you want to use the PDFLIB package (third install option below).
+LHAPDF is needed to install with the second option below.
+
+
+--- For the impatient -------------
+
+IF LHAPDF is already installed on your system AND lhapdf-config is in your
+path, then just do
+
+  tar zxf FONLL-1.3.3.tgz
+  cd FONLL-1.3.3/Linux
+  ./makefonlllha
+
+Alternatively, follow one of the set of instructions below.
+
+
+--- first option: proprietary PDF package ------
+
+- Change to the directory FONLL/Linux (or to another directory you created)
+
+- Execute makefonll to compile and link the executable (fonll)
+  
+- Unpack the FONLL/pdfdata.tgz archive, or provide for the following step 
+  to be able to find the PDF datafiles in your specific location
+
+- execute FONLL/pdfdata/linkpdf.sh in the directory from where you intend 
+  to run the fonll executable. This creates links to the PDF datafiles 
+  needed by hvqpdfpho.f
+  
+- the shell tests.com in FONLL/tests executes a few test runs. It takes
+  about 8 minutes on a Pentium III 866 MHz and about 5 minutes on a 
+  Pentium 4 1.7 GHz (with gcc-g77 2.96). Its output (testfonll.outlog) can 
+  be compared to the file testfonll.outlog-vX.X. 
+  In order to run, tests.com creates in its directory the links to the 
+  PDF datafiles by running FONLL/pdfdata/linpdf.sh  
+  These links and other auxiliary files are deleted at the end of the run.
+  NB: the file .outlog is not erased at the begining of a run. If you run 
+  the code twice with the same filename tag you'll find both outputs in 
+  there.
+
+  ---------------------- OR ---------------------------------------------
+
+--- second option: LHAPDF ------
+
+- Execute makefonlllha to compile and link with the LHAPDF parton
+  distribution libraries package. This produces the executable fonlllha
+
+  The LHAPDF libraries will have to be installed on your system,
+  and their location set in the main FONLL/main/Makefile by editing
+  the variable LIBSLHA
+  
+  ---------------------- OR ---------------------------------------------
+
+--- third option: PDFLIB. Deprecated!!! ------
+
+- makefonllpdl links instead to the PDFLIB package from the CERN libraries
+  rather than to the library that comes with FONLL (hvqpdfpho), and 
+  creates the executable fonllpdl
+  
+  The PDFLIB libraries will have to be installed on your system,
+  and their location set in the main FONLL/main/Makefile by editing
+  the variable LIBSPDL
+
+  

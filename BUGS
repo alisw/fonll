@@ -1,0 +1,43 @@
+**** v1.3.2 and below ****
+
+- Will give wrong results for photo and electroproduction
+  with the photon PDF set AFG (n. 363) if used with LHAPDF
+  version >= 5.8.5. 
+
+**** v1.3.0 ****
+
+August 2007
+
+- The large-rapidity problem described below should be fixed.
+  (see ChangeLog). 
+  An asterisk is still outupt when the result might be unreliable,
+  though this might not be visible from the numerical error.
+
+- hdresummed/struv_plus_avgo.f (introduced to fix the large
+  rapidity problem) does not compile with the IBM compiler
+  xlf v8.1 on Mac. It works fine with g77 though.
+
+
+**** v1.11 ****
+
+December 2004
+
+- In some conditions (e.g. charm production at Tevatron energy 
+  (sqrt(S) = 1960 GeV), small p_T and large rapidity (y >~ 2))
+  the cross section behaves erratically. (Thanks to An Tai)
+
+  Cause: the resummed component becomes very large, and the
+  suppression factor for spurious higher orders cannot tame them.
+
+  Solution: no fix yet, but as of v1.12 an asterisk appear
+  besides potentially troublesome points when using the fonll
+  main (and not directly the fonll0 soubroutine). The detailed
+  (rs-ml)/mv factor (before suppression) is then output in .outlog
+
+  This problem will also likely be present in previous versions.
+
+
+- When using the xlf compiler on OSX/Darwin with the 
+  -O3 optimization option the FOM0 component gives slightly different 
+  results. -O appears to work fine, and the speed-up is similar
+

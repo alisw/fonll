@@ -1,0 +1,291 @@
+*** Version 1.3.3 ***
+
+April 10, 2014
+
+        Eliminated the last (hopefully) vestige of output to an auxiliary
+	but useless file (phres.tmp) in phresummed/photon_wps8.f
+
+April 9, 2014
+
+        Inserted an LHAPDF version number test in common/lhapdfif.f,
+	so as to check whether the hack to fix the AFG photon PDF
+        set (n. 363) should still be used, since the bug has been fixed 
+	in LHAPDF since release 5.8.5 -02/02/2011
+
+        This means that FONLL >= v1.3.3 can only be used with an LHAPDF version
+	that supports the call to getlhapdfversion(). This function seems
+	to be present at least as early as LHAPDF v5.5.0, which dates from 2008
+
+
+*** Version 1.3.2 ***
+
+July 25, 2012
+
+	Replaced "double precision" with "real*8" in common/hvqpdfpho.f,
+	and made explicit the return type of ctq61pdf() in cteq61() for
+	gfortran compatibility
+
+September 30, 2010
+
+        Fixed a compatibility problem with gfortran 4.4 (toend() produces
+        and infinite loop. Replaced with "access='append'" in the open
+        statement) in main/fonll.f. This seems to work with g77, g95 and
+        gfortran 4.4 on Darwin
+
+        Also, eliminated useless output to phres.tmp in 
+        phresummed/photon_wps8.f
+
+May 20, 2010
+   
+        Added file eps09.f in common (and to the Makefile in main)
+	for providing the new EPS09 nuclear PDFs. Modified fonllpdf.f
+	accordingly
+	
+
+January 29, 2010
+
+        Eliminated writing of hdms-log.tmp, unit 66, in hdmassive/hdms.f
+        to try to get rid of pointlike random crashes when multiple
+        instances of the code run together in the same directory 
+
+        Same for phmassive/phms.f
+
+        This seems to solve most of the problems, but not all of them.
+
+December 8, 2009
+
+        Compactified long equation in hdresumment/struv_plus_avgo.f
+        because the Intel ifort compiler does not accept more than 511
+        continuation lines.
+
+        COMPILATION WITH ifort MUST INCLUDE THE -save FLAG
+
+November 11, 2008
+
+        Fixed a bug in pdfpar() in common/lhapdfif.f which was
+        preventing the use of LHAPDF with electrons.
+        In the same routine added a check preventing repeated
+        printout of the alpha_s value (happened when using photons)
+
+July 9 and 11, 2008
+
+        Added save statements to alfas() in common/hvqpdfpho.f,  
+	alfas_p() and air() in common/fonfra_p.f, phdfpy() in 
+        phmassive/phms.f, dfpy() in hdmassive/hdms.f, fonpdf() and 
+        afgpdf() in common/hvqpdfpho.f  to make them compatible with 
+        gfortran and g95. "save" added to all routines in hvqpdfpho.f
+        containing an "if(init..." block.
+
+        NB: "save" statemants are probably missing in other routines
+
+        NB2: OPTIMIZATION (-O) SHOULD NOT BE USED WITH GFORTRAN OR G95
+             UNLESS A -fno-automatic STATEMENT IS ALSO INCLUDED
+
+*** Version 1.3.1 ***
+
+Februray 1, 2008
+        common/lhapdfif.f: the lambda5 value is now calculated
+        from the alpha_s(mz) one. This avoids problems with sets
+        which return 0 (like cteq6.5 and, more importantly, with
+        MRST sets which return a slightly different lambda5, leading
+        to an incorrect value for alpha_s
+    
+
+*** Version 1.3.0 ***
+
+December 17, 2007
+        Eliminated output to unit 32, hdrsout.tmp, in hdresummed/main_p.f,
+        as it was essentially useless
+
+        Patched output format (i1->i2) for isuda variable 
+        and for pdf set in hdresummed/input.f
+
+        Suppressed output to unit 15, hdres.tmp, from hdresummed/input.f 
+        and hdresummed/main_p.f (can be reinstated by setting ioutput=15
+        in hdresemmed/input.f)
+
+        Shifted the wmax limit from 1 to 1-1d-16 in 
+        dplus() in hdresummed/main_p.f to avoid a 1/1-w division by zero
+        error in the w-1 limit
+
+December 9, 2007
+        Fixed LIBSLHA variable in main/Makefile so that it uses
+        lhapdf-config from the LHAPDF installation. It must, of
+        course, be correctly included in PATH beforehand
+
+        LHAPDF does not return correctly lambda_QCD for CTEQ65.
+        Value added by hand in common/lhapdfif.f
+
+October 22, 2007
+	IMPORTANT CHANGE: Added interface to LHAPDF, file common/lhapdfif.f
+
+	modified fonllpdf.f : removed mlmpdf8 (moved to hvqpdfpho.f)
+	                      jetpdflib now calls directly mlmpdf8
+
+	renamed param to hdrsparam in hdresummed/input.f, main_p.f
+	
+September 3, 2007
+        IMPORTANT CHANGE:
+        Similarly to the massless calculation, the resummed one also suffers
+        from numerical precision problems in certain limits, for 
+        instance at large rapidity.
+        The combination STRUV*+AVGO in the function fresc() in 
+        hdresummed/main_p.f has been reimplemented in the function
+        struv_plus_avgo in hdresummed/struv_plus_avgo.f by simplifying
+        the proper matrix element contribution via Mathematica.
+        This (together with the similar simplification described below) 
+        should fix most of the numerical precision problems.
+        
+Aug. 30, 2007
+        Fixed the wrapper to cteq6.1 in common/hvqpdfpho.f
+        Bug was instead leading to the naming convention of cteq6 for
+        data tables
+
+Aug. 19, 2007
+        IMPORTANT CHANGE:
+	The function hqhpggm0 in hdmassive/rozlimgg.f lost precision
+        in the large rapidity limit. This should now be fixed
+        by a rewriting of part of the formula, through a simplification
+        obtained with Mathematica.
+	
+	Added the option icalctype=4, to calculate massive and massless
+	only (i.e. no resummed)
+
+        Added to the function dfpy() in hdmassive/hdms.f the option
+	to perform the integrals using VEGAS. Actually not used
+	(hardcoded), because the precision looks good enough with the
+	old (faster) option
+		
+          
+Jul. 6, 2007
+        Passed the input epsint to dovegas, so that the precision
+        of the integral can be set in fonll0.f (default is 0.001).
+        Also set the precision of the xes1 integral to epsint*10
+        in hdresummed/main_p.f.
+        This will cause small changes in numbers, but the         
+        overall numerical precision should stay between 0.001 
+        and 0.01
+
+Jul. 4, 2007
+        Fixed a division by zero in fonll.f, it caused crashes on
+        Linux when beyond rapidity range
+
+*** Version 1.2.1 ***
+
+May 8, 2007
+        Included a test to be used with EKS PDF's to avoid a crash
+        in the x->1 limit
+
+*** Version 1.2 ***
+
+Sep. 6, 2005
+	Paolo's trick evolved to what we have in the fragmentation paper.
+	nf in Sudakov initial condition also changed to 3 for charm
+	and 4 for bottom
+
+Jul. 6, 2005
+        Included Sudakov resummation for initial conditions, together
+        with Paolo's trick (isuda=12 in main/fonll0.f) for handling 
+        large-N values. This improves slightly the behaviour at small-pT 
+        and large y (i.e. small-x, see below)	
+
+May 20, 2005
+        Added option for including shadowing corrections via the EKS
+        package. To use them, put -A (atomic number) as beam type.
+	For instance, Pb is -208
+
+Apr. 27, 2005
+	Changed output in fonll.f. Now the error on the resummed
+	part, and an asterisk if it is larger than half the massive,
+	are in output.
+
+	Changed a little VEGAS integration in dovegas. Now 
+	charm at large rapidity seems to work slightly better. The 
+	probles is the convergence of the 3-dim integral for xes1
+	More work on this is needed (see Sudakov above)
+
+	If main_p.f.new is used:
+	Interpreted eta = y in hdresummed/main_p.f, analogously
+	to what is done with pT -> mT. This was actually done also
+        before, as a consequence of using massless kinematics.
+        Just rewritten the file more clearly. Old file left for comparison
+
+Apr 8, 2005
+        Version number written in file main/version.h and included
+        in fonll.f and fonlltest.f
+
+
+*** Version 1.12 ***
+
+Mar. 14, 2005
+        Added in fonll.f the check about the size of higher orders 
+        (see BUGS)
+
+
+*** Version 1.11 ***
+
+Apr. 1, 2004
+        Added in INSTALL the line about unpacking pdfdata.tgz
+
+Feb. 18, 2004
+	A few changes to make it compatible with the Intel Fortran
+	compiler. Input unit changed from 5 to 55, a few lines
+	shortened, a missing output in phresummed input fixed
+
+Dec. 16, 2003
+	Replaced hvqpdfpho.f. New version has the correct implementation
+        of the Alekhin sets. Added datafiles in pdfdata
+
+
+*** Version 1.1 ***
+
+Oct. 28, 2003
+	Small changes to dialogue in main/fonll.f and misc1/fonllgrid.f
+        Updated common/hvqpdfpho.f, and added data files for hessian
+		errors with CTEQ6M and MRST2001 in pdfdata
+	Changed tests/tests.com to remove also links to new pdf data
+	Changed maketar for dynamical main directory name
+        tests/testfonll.outlog-ref renamed to tests/testfonll.outlog-v1.0
+		INSTALL modified to reflect the renaming
+	Added tests/testfonll.outlog-v1.1 (identical to v1.0)
+	Eliminated the run directory (the user will run the code from
+		her own preferred location)
+	Added output unit number (itm=53) in misc2/interp.f
+	Changed version number in README	
+	
+*** Version 1.0 ***
+
+Jan. 2 2003
+	main/fonlltest.f: print version number in .outlog file
+	hdmassive/hdms.f: changed name of input log, from hvqphoms.log 
+		to hdms-log.tmp;
+	phmassive/phms.f: changed name of input log, from phoms.log to 
+		phms-log.tmp
+	README: changed to account for above changes.
+	tests/tests.com:  changed to remove files with new names
+	tests/testfonll.outlog-ref: changed in trivial way
+	(FONLL v0.99 line appears); non-trivial changes to electr. proton
+		output,	because of different interpolation (splines).
+	Documentation/hvqpdfpho.txt.sh created; it generates the hvqpdfpho.txt 
+		pdf numbering file for the hvqpdfpho package. hvqpdfpho.txt 
+		recreated.
+
+Dec. 23 2002
+	main/fonll.f: print version number in .outlog file
+	hdresummed/main_p.f: output file renamed to hdrsout.tmp (was main.out)
+
+	misc1/ : various changes to fragmfonll, to make it easier for users
+		example changed to Tevatron, as in Cacciari-Nason, prl 2002
+
+Dec. 19 2002
+	INSTALL: Sentence added on other unix platforms and CERNLIB
+	common/hvqpdfpho.f newer version of cteq5 included
+	main/fonll.f, fonlltest.f      prefix string up to 30 characters
+
+Dec. 13 2002
+	common/fonllpdf.f modified to use cernlib spline interpolation
+		for electron pdf
+	common/dcspln.f   cernlib spline added
+	common/locatd.f   cernlib locatd added
+	main/Makefile     dcspln.o and locatd.o included in files to link in
+	

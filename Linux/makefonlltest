@@ -1,0 +1,3 @@
+#!/bin/bash
+
+make -f ../main/Makefile VPATH=../main:../hdmassive:../hdresummed:../phmassive:../phresummed:../common fonlltest

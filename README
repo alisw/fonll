@@ -1,0 +1,215 @@
+***********************************************************************
+
+             FONLL            version 1.3.3 (April 2014)
+
+ Program to calculate heavy quark transverse momentum and
+ rapidity distributions in hadron-hadron and photon-hadron
+ collisions, matching Fixed Order next-to-leading order terms
+ and Next-to-Leading-Log large-p_T resummation.
+
+ by Matteo Cacciari, Stefano Frixione, Paolo Nason
+
+ Citation for this work:
+		 
+1)  M. Cacciari, M. Greco and P. Nason,
+       "The p_T Spectrum in Heavy Flavor Hadroproduction",
+       JHEP 9805 (1998) 007 [hep-ph/9803400]
+2)  M. Cacciari, S. Frixione and P. Nason,
+       "The p_T Spectrum in Heavy Flavor Photoproduction",
+       JHEP 0103 (2001) 006 [hep-ph/0102134]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\cite{Cacciari:1998it}
+\bibitem{Cacciari:1998it}
+M.~Cacciari, M.~Greco and P.~Nason,
+%``The p(T) spectrum in heavy-flavour hadroproduction,''
+JHEP {\bf 9805} (1998) 007
+[arXiv:hep-ph/9803400].
+%%CITATION = HEP-PH 9803400;%%
+%\cite{Cacciari:2001td}
+\bibitem{Cacciari:2001td}
+M.~Cacciari, S.~Frixione and P.~Nason,
+%``The p(T) spectrum in heavy-flavor photoproduction,''
+JHEP {\bf 0103} (2001) 006
+[arXiv:hep-ph/0102134].
+%%CITATION = HEP-PH 0102134;%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				 
+
+  Built upon the following papers/codes:
+			 
+  S. Frixione and P. Nason,
+       "Phenomenological study of charm photoproduction at HERA",
+       JHEP 0203 (2002) 053 [hep-ph/0201281]
+  M. Cacciari, S. Frixione and P. Nason,
+       "The p_T Spectrum in Heavy Flavor Photoproduction",
+       JHEP 0103 (2001) 006 [hep-ph/0102134]
+  M. Cacciari, M. Greco and P. Nason,
+       "The p_T Spectrum in Heavy Flavor Hadroproduction",
+       JHEP 9805 (1998) 007 [hep-ph/9803400]
+  M. Cacciari and M. Greco,
+       "Charm Photoproduction via Fragmentation",
+       Z.Phys. C69 (1996) 459 [hep-ph/9505419] 
+  M. Cacciari and M. Greco,			 
+       "Large p_T Hadroproduction of Heavy Quarks",
+       Nucl.Phys. B421 (1994) 530 [hep-ph/9311260]
+  B. Mele and P. Nason, 
+       "The Fragmentation Function for Heavy Quarks in QCD",
+       Nucl.Phys. B361 (1991) 626
+  P. Nason, S. Dawson and R.K. Ellis,
+       "The One-Particle Inclusive Differential Cross-Section
+	for Heavy Quark Production in Hadronic Collisions",
+       Nucl.Phys. B327 (1989) 49
+  F. Aversa, P. Chiappetta, M. Greco and J.-Ph. Guillet,
+       "QCD Corrections to Parton-Parton Scattering Processes",
+       Nucl.Phys. B327 (1989) 105
+  R.K. Ellis and P. Nason,
+       "QCD Radiative Corrections to the Photoproduction
+	of Heavy Quarks",
+       Nucl.Phys. B312 (1989) 551
+  P. Aurenche, R. Baier, A. Douiri, M. Fontannaz and D. Schiff,
+       "Scheme Invariant Higher Order QCD Predictions for
+	Large p_T Photoproduction Reactions",
+       Nucl.Phys. B286 (1987) 553
+
+**********************************************************************
+
+The installation instructions are given in the file INSTALL. See that
+file also for instructions about running a test of the installed code.
+
+The FONLL code produces a SINGLE point of the double-differential cross
+section dsigma/dpT^2/dy, and outputs it (in picobarn) in a file .out
+with format pt,y,dsigma
+
+A file .outlog is created  containing all the relevant inputs of a run,
+and the various components of the final result. All the results of runs
+made with the same name tag are appended to this file.
+
+If integrated cross sections are needed, it is up to the user to collect
+these differential results and to integrate them.
+
+A grid can be produced either by running the whole code several times,
+or by building a Fortran code which loops over the subroutine fonll0
+(see the file FONLL/main/fonll0.f, and how it is called from
+FONLL/main/fonll.f, which is the main program of the FONLL code).
+
+When run, the program describes the inputs it expects. Sample input files
+are as follows:
+
+1) bottom production at the Tevatron (run 2) using the hvqpdfpho.f 
+   library (cteq6m in this case):
+**********************************************************************
+b-Tevatron        ! tag for output files
+  1  980. 0 0 131 ! beam1: type, ener.,  nptype, ngroup, nset
+ -1  980. 0 0 131 ! beam2: type, ener.,  nptype, ngroup, nset
+  5               ! heavy quark mass
+  -1              ! Lambda_5, <=0 for default
+  1   1           ! ren. and fact. scale factors
+  30. 0.          ! pt,y_lab
+  1               ! icalctype
+**********************************************************************
+This should return the file b-Tevatron.out containing three numbers
+per line: pt, y and dsigma/dpT^2/dy (in picobarn)
+
+In b-Tevatron.outlog a move verbose output is written,
+reporting all input parameters and several partial results:
+hdmv=hadronic massive O(as^3) result (FO in ref.1, FO_{hdr} in ref. 2)
+hdml=as above, without mass terms (FOM0 in ref.1, FOM0_{hdr} in ref. 2)
+phmv=in case of photoproduction or electroproduction, O(as^2 aem) cross section
+     (FO_{pnt} in ref. 2).
+phml=as above, without mass terms (FOM0_{pnt} in ref. 2).
+hdrs=hadroproduction resummed result (RS in ref.1, RS_{hdr} in ref. 2)
+phrs=pointlike photon resummed result (RS_{pnt} in ref.2)
+
+In the case of hadroproduction, the photonic components of the cross
+section are reported to be zero.
+
+2) charm electroproduction at HERA (H1 ETAG33 setup):
+**********************************************************************
+c-HERA          ! tag for output files
+ 1  920. 0 0 81 ! beam1: type, ener.,  nptype, ngroup, nset
+ 5  27.5 0 0 42 ! beam2: type, ener.,  nptype, ngroup, nset
+  1.5           ! heavy quark mass
+  -1            ! Lambda_5, <=0 for default
+  1    1        ! ren. and fact. scale factors
+  10. 1.        ! pt,y_lab
+ 1              ! icalctype
+ 1              ! WW type  
+.1              ! max. sqrt(Q^2) (GeV)
+.29  .62        ! zmin and zmax in the WW integration
+**********************************************************************
+Note the choice of a PHOTON PDF set (AFG in this case) for doing
+electroproduction. The FONLL code handles the convolution with the
+Weizsaecker-Williams function.
+Results will be in c-HERA.out and c-HERA.outlog
+
+
+The program incorporates three different interfaces to Parton 
+Distribution Function libraries, which can be selected by
+building the proper executable:
+
+- A proprietary one is given by the file hvqpdfpho.f.
+  Data files are collected in FONLL/pdfdata/. The numbering scheme can be 
+  found in the file FONLL/common/hvqpdfpho.f
+
+- The interface to the (old and not anymore maintained) PDFLIB library
+  is provided by the file common/jetpdflib.f
+  When linking the code to the PDFLIB package from the CERN libraries,
+  three numbers have to be provided in order to determine the PDF set,
+  rather than only one.
+  NB: our interface to PDFLIB compensates for a bug which multiplies by
+  two the outputs of the AFG photon PDF set. As of version 8.04 of PDFLIB
+  this bug is still present. If removed, one should then update the
+  interface.
+
+- Finally, the program also provides an interface to the modern PDF
+  library LHAPDF via the file common/lhapdfif.f 
+  In this case a single number, in the place of the one used by 
+  hvqpdfpho.f, has to be provided to indentify the pdf set (for
+  instance "0 0 10050" will choose cteq6m)
+  The AFG bug is present here too, and has finally been corrected in 
+  LHAPDF v5.8.5. 
+     - FONLL <= v1.3.2 was always fixing the bug itself, so it is fine
+       to use with any version of LHAPDF < 5.8.5. 
+     - FONLL >= v1.3.3 checks for the LHAPDF version used before deciding 
+       whether to fix the bug or not.
+     *** It is therefore WRONG to use FONLL <= v1.3.2 with LHAPDF >= v5.8.5 
+         for photoproduction or electroproduction ***
+
+Nuclear PDFs, as implemented either in EKS98 or EPS09, can also be used.
+ * For EKS, the beam type should be set to -A, where A is the atomic number
+   (for instance, -208 will give a Pb beam)
+ * For EPS, where multiple error sets exist, the beam type should to
+   -(A*1000+pset), where pset is the number of the error set, running from
+   1 (central set) to 31 (e.g. -208002)
+In both cases the appropriate files containing the PDF sets should be copied 
+or linked to the working directory.
+
+
+The program produces a number of internal files; they all have the form
+*.tmp. They can be safely removed.
+
+The other files produced are
+tag.out
+tag.outlog
+tag-fonll.log
+where 'tag' is the prefix string entered for the run.
+The first two files contain the output of the run. The .log file
+contains the input used for the run. Suitably renamed, it can be used
+as input file for the run (using redirection).
+
+
+The FONLL program does not provide for the convolution with a non-perturbative
+fragmentation function. The typical time to produce a point in pt and y
+is of the order of a minute; it is thus convenient to generate a grid
+of cross section values, to be interpolated later in order to perform
+the convolution with a non-perturbative fragmentation function.
+It is up to the user to make sure that the grid he is using
+is sufficient to yield good interpolation. We do however provide
+examples of how to set up a grid and interpolate it.
+Two different methods are illustrated in the directories misc1 and misc2.
+These are provided as a basic set of tools to be modified according to
+the user's needs in order to obtain a cross section which includes
+a convolution with a fragmentation function, and eventually also
+an integrated cross section with given cuts.
+

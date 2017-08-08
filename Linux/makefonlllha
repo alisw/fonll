@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# NB. lhapdf-config must be in your path
+make -f ../main/Makefile VPATH=../main:../hdmassive:../hdresummed:../phmassive:../phresummed:../common fonlllha

@@ -1,0 +1,117 @@
+#!/bin/bash
+
+# Example of grid generation, with production of final integrated result,
+# with or without inclusion of non-perturbative fragmentation.
+#
+# The program fonllgrid is a driver program to the fonll
+# package, that produces a y-pt grid;
+# 
+#
+# The program fragmfonll reads the output of fonllgrid (*.out file)
+# and interpolates it; it can then
+# produce all kind of output (with rapidity and pt cuts, pseudorapidity
+# cuts, etc.) with or without the inclusion of a non-perturative fragmentation
+# function. It can also read several grids and generate an upper and
+# lower range for a cross section.
+#
+# Warning! the cross section is set to zero for points outside of the grid!
+#
+# This README file should be executable in a Linux system to perform
+# all of the above steps.
+
+# first create the executable
+(cd ../Linux ; make -f ../misc1/Makefile  VPATH=../misc1:../main:../hdmassive:../hdresummed:../phmassive:../phresummed:../common fonllgrid )
+
+# create links for pdf data files
+../pdfdata/linkpdf.sh
+
+# execute for scale factors 1 1 (the program verbosely prompts for input)
+
+../Linux/fonllgrid <<EOF
+bte
+ 1  900. 0 0 108 ! beam1: type, ener.,  nptype, ngroup, nset
+ -1  900. 0 0 108 ! beam2: type, ener.,  nptype, ngroup, nset
+  4.75 ! heavy quark mass
+ -1. ! Lambda_5, <=0 for default
+1 1   ! ren. and fact. scale factors
+-0.1           ! begin y sequence
+0
+0.1
+0.2
+0.4
+0.6
+0.8
+1
+1.2 
+10000          ! value to terminate y sequence
+ 1 ! 0 for auto pt seq.
+  3.   ! pt points
+  4.   ! pt points
+  5.   ! pt points
+  6.   ! pt points
+  8.   ! pt points
+  10.   ! pt points
+  14.   ! pt points
+  18.   ! pt points
+  20.   ! pt points
+  24.   ! pt points
+  28.   ! pt points
+  30.   ! pt points
+  35.   ! pt points
+  40.   ! pt points
+  50.   ! pt points
+  60.   ! pt points
+  80.   ! pt points
+  100.   ! pt points
+  120.   ! pt points
+  140.   ! pt points
+  160.   ! pt points
+  180.   ! pt points
+  200.   ! pt points
+ -1.   ! pt points
+ 1   ! icalctype
+EOF
+
+
+# first create the fragmfonll executable
+(cd ../Linux ; make -f ../misc1/Makefile VPATH=../misc1:../main:../hdmassive:../hdresummed:../phmassive:../phresummed:../common fragmfonll )
+
+# execute with chte.out as input, to get integrated cross section
+# for given ymin < y < ymax, ptmin < pt < ptmax.
+# (the program verbosely prompts for input)
+
+../Linux/fragmfonll <<EOF
+ 0 ! 0 for H-H, 1 for ph/el-H
+ 0 ! 0 for matched, etc.
+  5.  ! c param. for matching
+bte.out                                                            
+                                                                       
+ 0  ! -1 for low, 0 for central, 1 for high
+ 2  ! 0:no fr., 1: Pet., 2: (1-x)x^ep
+ 1   ! fragm. frame y=0
+-1   ! heavy meson mass = quark mass
+29.1   ! peterson parameter
+ 11   ! d sigma/d pt, ymin<y<ymax'
+ 5  0 1      ! ymin,ymax,pt
+ 7  0 1
+ 8  0 1
+ 9  0 1
+ 10 0 1
+ 11 0 1
+ 12 0 1
+ 13 0 1
+ 14 0 1
+ 15 0 1
+ 16 0 1
+ 17 0 1
+ 18 0 1
+ 19 0 1
+ 20 0 1
+ -1 0 1               ! negative pt to terminate
+EOF
+
+
+# the file fragmfonll.out is self explanatory, and contains the cross section
+# for the B hadron;
+# the computed cross section does not include the fragmentation fraction
+# for the specific hadron.

@@ -1,0 +1,222 @@
+Numbering scheme for the Parton Distribution Function sets contained
+in the hvqpdfpho.f library.
+
+NB. When doing electroproduction the user must chose a PHOTON PDF set;
+    the FONLL program takes care of computing the corresponding electron
+    parton density.
+ 
+  Set     Authors     Lambda_4    Lambda_5_2loop   Scheme
+    1     DO I    *    .200 *      .340              MS  
+    1     OW I PION *  .200 *      .340              MS  
+    2     DO II   *    .400 *      .680              MS  
+    2     OW II PION * .400 *      .680              MS  
+    3     EHLQ  I *    .200 *      .340              MS  
+    4     EHLQ II *    .290 *      .490              MS  
+    5     DFLM         .160        .101              DI  
+    6     DFLM         .260        .173              DI  
+    7     DFLM         .360        .250              DI  
+
+   10     MRSA mod.    .230        .151              MS  
+   11     HMRS B       .190        .122              MS  
+   12     KMRS B       .190        .122              MS  
+   13      MRS B       .135        .083              MS  
+   14      MRS B       .160        .101              MS  
+   15      MRS B       .200        .130              MS  
+   16      MRS B       .235        .155              MS  
+   17     MRSS0        .215        .140              MS  
+   18     MRSD0        .215        .140              MS  
+   19     MRSD-        .215        .140              MS  
+   20     MRSA         .230        .151              MS  
+
+   21     MT S1        .212        .138              DI  
+   22     MT B1        .194        .125              DI  
+   23     MT B2        .191        .123              DI  
+   24     MT E1        .155        .097              DI  
+   25     MT S1M       .212        .138              MS  
+   26     MT S2        .237        .156              DI  
+   27     MT S2M       .237        .156              MS  
+   28     MT SL   *    .144 *      .245              MS  
+   31     SMRS PION1   .190        .122              MS  
+   32     SMRS PION2   .190        .122              MS  
+   33     SMRS PION3   .190        .122              MS  
+   40     DGK PHOTON*  .400*       .680              MS  
+   41     ACFGP-MC PH  .200        .130              MS  
+   42     AFG-MC PH    .200        .130              MS  
+   43     GRV-HO PH    .200        .130              DI_G
+   44     LAC1 PH*     .200        .130              MS  
+   50     DGK      EL* .400*       .680              MS  
+   51     LAC1     EL* .200        .130              MS  
+   52     LAC2     EL* .200        .130              MS  
+   53     LAC3     EL* .200        .130              MS  
+   54     GS-G HO  EL  .200        .130              MS  
+   55     GRV-G HO EL  .200        .130              DI_G
+   56     ACFGP-MC EL  .200        .130              MS  
+   57     AFG-MC   EL  .200        .130              MS  
+
+   61     CTEQ1M       .231        .152              MS  
+   62     CTEQ1MS      .231        .152              MS  
+   63     CTEQ1ML      .322        .220              MS  
+   64     CTEQ1D       .247        .164              DI  
+   65     CTEQ1L  *    .168 *      .125 *            MS  
+   66     CTEQ3M       .239        .158              MS  
+   67     CTEQ3L  *    .177 *      .132 *            MS  
+   68     CTEQ3D       .247        .164              DI  
+
+   71     MRSA prime   .231        .152              MS  
+   72     MRSG         .255        .170              MS  
+   73     MRS105       .158        .0994             MS  
+   74     MRS110       .214        .140              MS  
+   75     MRS115       .282        .190              MS  
+   76     MRS120       .364        .253              MS  
+   77     MRS125       .458        .328              MS  
+   78     MRS130       .566        .416              MS  
+
+   81     CTEQ4M       .298        .202              MS  
+   82     CTEQ4D       .298        .202              DI  
+   83     CTEQ4L *     .298        .202              MS  
+   84     CTEQ4A1      .214        .140              MS  
+   85     CTEQ4A2      .254        .169              MS  
+   86     CTEQ4A4      .346        .239              MS  
+   87     CTEQ4A5      .400        .281              MS  
+   88     CTEQ4HJ      .298        .202              MS  
+   89     CTEQ4LQ      .268        .179              MS  
+
+   91     MRSR1(1996)  .241        .159              MS  
+   92     MRSR2  ..    .344        .237              MS  
+   93     MRSR3  ..    .241        .159              MS  
+   94     MRSR4  ..    .344        .237              MS  
+   95     MRST1(1998)  .321        .220              MS  
+   96     MRSTH  ..    .321        .220              MS  
+   97     MRSTL  ..    .321        .220              MS  
+   98     MRSTM  ..    .247        .164              MS  
+   99     MRSTP  ..    .409        .288              MS  
+
+  101     CTEQ5M       .329        .226  (as=0.118)  MS  
+  102     CTEQ5D       .329        .226  (as=0.118)  DI  
+  103     CTEQ5L       .192        .146  (as=0.127)  MS  
+  104     CTEQ5HJ      .329        .226  (as=0.118)  MS  
+  105     CTEQ5HQ      .329        .226  (as=0.118)  MS  
+  106     CTEQ5F3      Nf=3, L_3=.395    (as=0.106)  MS  
+  107     CTEQ5F4      Nf=4, L_4=.309    (as=0.112)  MS  
+  108     CTEQ5M1      .329        .226  (as=0.118)  MS  
+  109     CTEQ5HQ1     .329        .226  (as=0.118)  MS  
+  110     CTEQ5M1(parametrized version)                  
+
+  111     MRST99 COR01 .321        .220              MS  
+  112     MRSTH  COR02 .321        .220              MS  
+  113     MRSTL  COR03 .321        .220              MS  
+  114     MRSTM  COR04 .247        .164              MS  
+  115     MRSTP  COR05 .409        .288              MS  
+  116     MRST99 COR06 .327        .224              MS  
+  117     MRST99 COR07 .315        .215              MS  
+  118     MRST99 COR08 .321        .220              MS  
+  119     MRST99 COR09 .321        .220              MS  
+  120     MRST99 COR10 .321        .220              MS  
+  121     MRST99 COR11 .321        .220              MS  
+  122     MRST99 COR12 .321        .220              MS  
+
+  131     CTEQ6M       .326        .226  (as=0.118)  MS  
+  132     CTEQ6D       .326        .226  (as=0.118)  DI  
+  133     CTEQ6L       .326        .226  (as=0.118)  MS  
+  134-173 CTEQ6M1xx    .326        .226  (as=0.118)  MS  
+
+  181     MRST200?NNLO av.  .29         0.1805 (as=0.1155) MS  
+  182     MRST200?NNLO fast .29         0.1805 (as=0.1155) MS  
+  183     MRST200?NNLO slow .29         0.1805 (as=0.1155) MS  
+  184     MRST200?NNLO jet  .33         0.209  (as=0.118)  MS  
+  185     MRST2001  best fit .347        .239  (as=0.119)  MS  
+  186     MRST2001  low as   .313        .214  (as=0.117)  MS  
+  187     MRST2001  high as  .382        .267  (as=0.121)  MS  
+  188     MRST2001  jet fit  .382        .267  (as=0.121)  MS  
+  189     MRST2001lo         .566        .416  (as=0.130)  LO  
+
+  191     MRST2002     .359        .249  (as=0.1197) MS  
+  192     MRST2002NNLO .289        .1795 (as=0.1154) MS  
+  200-230 MRS2001E     .347        .239  (as=0.119)  MS  
+
+  Alekhin pdf sets;
+  231  LO  nominal ffn;            .4163 (as=0.1301)
+  232  LO  nominal vfn
+  233  LO  mc=1.85 ffn
+  234  LO  mc=1.85 vfn
+  235  LO  ss      ffn
+  236  LO  ss      vfn
+  237  NL  nominal ffn;            .215  (as=0.1171)
+  238  NL  nominal vfn
+  239  NL  mc=1.85 ffn
+  240  NL  mc=1.85 vfn
+  241  NL  ss      ffn
+  242  NL  ss      vfn
+  243  NNL  nominal ffn;           .1826 (as=0.1143)
+  244  NNL  nominal vfn
+  245  NNL  mc=1.85 ffn
+  246  NNL  mc=1.85 vfn
+  247  NNL  ss      ffn
+  248  NNL  ss      vfn
+  249  NNL  slow ev vfn
+  250  NNL  slow ev vfn
+  To get the sets with errorrs, replace the set number ndns
+  with ndns + (2*i-k)*10^6; this will return the pdf
+  minus (for k=1) or plus (for k=0) the variation
+  of the |ith| parameter
+
+  Cteq61
+  261  CTEQ6M (should be the same as 131)
+  262  CTEQ6D (should be the same as 132)
+  263  CTEQ6L (should be the same as 133)
+  264  CTEQ6L1
+  265  CTEQ6M (same as 261)
+       265 + (2*i-k)*10^6 returns the + (k=1) or - (k=0)
+               variation of the ith eigenvector (i=1,20)
+       (same as 234-273)
+  266  CTEQ6.1M, 265 + (2*i-k)*10^6 corresponding errors
+
+   PDF sets followed by * are obtained from a 1-loop analysis,
+   and the relative values of Lambda_4 refer to 1-loop. 
+   Lambda is automatically converted to 2-loop for use with 
+   a 2-loop alpha in the program. The conversion is performed
+   in such a way that at a scale of 10 GeV the value of alpha
+   is the same. The MSbar subtr. scheme
+   is used by default with 1-loop structure functions.
+   MT set 26 has SU(3)-violating strange sea distributions
+   Morfin and Tung sets labeled 25 and 27 are simply MSbar 
+   versions of sets 21 and 26, respectively.
+   PDF sets 31-33 are the new NLO pion distributions by 
+   Sutton-MRS. Sets 13-16 are MRS fits of BCDMS data using
+   different values of Lambda PHYS REV D43 (91) 3648.
+   Sets 17-19 are the new NMC/CCFR fits by MRS (RAL-92-021)
+
+   Set 20: MRSA (Durham preprint, DTP/94/34)
+   Set 71: MRSA prime (Durham preprint, DTP/95/14)
+   Set 72: MRSG (Durham preprint, DTP/95/14)
+   Sets 73-78 are the MRS structure functions 
+   with variable Lambda. The values of Lambda5 quoted 
+   here correspond to values of alpha(Mz) of 0.105,0.110,0.115
+   0.120,0.125,0.130, which is slightly different from the
+   values one would obtain with the usual matching procedure
+   from the corresponding value of Lambda4 quoted by MRS
+
+   Sets 61-65 are the CTEQ1 fits (61=default, 62=sing.gluon,
+   63= LEP lambda, 64=DIS scheme, 65=LO fit).
+   Sets 81-89 are the CTEQ4 fits, H.L. Lai et al.,
+   CTEQ-604, hep-ph/9606399, (81=default, 82=DIS scheme,
+   83=leading order, 84-87=variable Lambda, 88=High-et jet fit,
+   89=low momentum evolution)
+
+   Set 40 corresponds to photon PDF's by Drees, Grassie, Kim
+   Z.Phys. C28 (1985) 51 and DTP/91/16
+   Set 41 corresponds to photon PDF's Aurenche et al.
+   Set 42 corresponds to photon PDF's Aurenche et al. (1994)
+   Set 43 corresponds to photon PDF's Glueck et al.
+   Set 44 corresponds to photon PDF's Abramowicz et al.
+   Set 50 corresponds to electron with photon DG
+   Set 51 corresponds to electron with photon LAC1
+   Set 52 corresponds to electron with photon LAC2
+   Set 53 corresponds to electron with photon LAC3
+   Set 54 corresponds to electron with photon GS-G HO
+   Set 55 corresponds to electron with photon GRV-G HO
+   Set 56 corresponds to electron with photon ACFGP-MC
+   Set 57 corresponds to electron with photon AFG-MC
+   GRV-G HO photon uses the DIS_gamma scheme, defined
+   in Gluck, Reya and Vogt, Phys. Rev. D45(1992)3986.
+

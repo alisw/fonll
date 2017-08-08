@@ -1,0 +1,8 @@
+aaa
+ 1  3500. 0 0 10050 ! beam1: type, ener.,  nptype, ngroup, nset
+ 1  3500. 0 0 10050 ! beam2: type, ener.,  nptype, ngroup, nset
+  4.75 ! heavy quark mass
+ -1. ! Lambda_5, <=0 for default
+  1.  1. !  fact. and ren. scale factors
+  50.  0. ! pt,y_lab
+ 1   ! icalctype

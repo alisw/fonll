@@ -1,0 +1,22 @@
+#!/bin/bash
+
+fonlldir=`basename $PWD`
+
+cd ..
+
+tar zcvf $fonlldir.tgz \
+     --exclude='*~' --exclude='*.o' --exclude='*#*' \
+     --exclude='*__afs*' --exclude='*/run/fonll*'   \
+     --exclude='*/Linux/fonll*' --exclude='Darwin*' \
+     --exclude='tests.Darwin' --exclude='tests.Linux' \
+     --exclude='Linux-intel'    \
+     --exclude='Linux-ifort'    \
+     --exclude='Linux-gfortran'    \
+     --exclude='Linux-g77'    \
+     --exclude='TEST' --exclude='Linux-xlf'         \
+     --exclude='pdfdata*'                           \
+     --exclude='Todo'                               \
+     --exclude='tmp'                               \
+     --exclude='*.f.*'                               \
+     $fonlldir
+

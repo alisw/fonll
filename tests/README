@@ -1,0 +1,6 @@
+tests.com is the standard test suite, using the hvqpdfpho
+proprietary PDF library.
+
+tests2.com allows one to choose LHAPDF, and compare the results.
+Moreover, calculations of a bottom and a charm cross section point
+at the LHC are added

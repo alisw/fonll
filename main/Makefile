@@ -21,7 +21,7 @@ endif
 FF=$(FC) $(OPT) $(DEBUG) $(AUTODBL) 
 
 INTPACK = fakenag.o vegas_p.o
-STRF =  fonstru_mlm.o fonllpdf.o eks98.o eps09.o
+STRF =  fonstru_mlm.o fonllpdf.o eks98.o eps09.o epps16.o
 STRFMLM = hvqpdfpho.o dummies.o elpdf_user.o
 STRFPDL = jetpdflib.o elpdf_user.o dummies.o
 STRFLHA = lhapdfif.o

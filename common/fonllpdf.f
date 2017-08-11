@@ -77,12 +77,12 @@ c        MC, 8/5/2007
 	      A = atomicnumber
               call eks98(xxs,q,A,ruv,rdv,ru,rd,rs,rc,rb,rt,rg)
 	 else
-c... this calls the new EPS09. Atomic number and pset are to be extracted
+c... this calls the new EPPS16. Atomic number and pset are to be extracted
 c... from an input of the form AA*1000+pset
 c... (note that A was a real in eks98, but an integer in eps09, hence AA)
               AA = atomicnumber/1000
               pset = atomicnumber - 1000*AA              
-              call eps09(2,pset,AA,xs,q,ruv,rdv,ru,rd,rs,rc,rb,rg)
+              call epps16(2,pset,AA,xs,q,ruv,rdv,ru,rd,rs,rc,rb,rg)
 	 endif
 	     	     
 	 fx(0) = fx(0)*rg                           ! gluon
